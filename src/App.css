@@ -105,7 +105,8 @@ button {
     height: 80vh;
   }
 
-  input {
+  input,
+  button {
     width: auto;
   }
 
