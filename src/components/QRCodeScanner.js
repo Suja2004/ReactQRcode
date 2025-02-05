@@ -16,27 +16,20 @@ const QRCodeScanner = () => {
       scanner.render(successCallback, errorCallback);
       setScannerInitialized(true);
     }
-    setScanning(true); // Start scanning
+    setScanning(true); 
   };
 
   const successCallback = (decodedText, decodedResult) => {
     console.log("QR Code decoded:", decodedText);
     setResult(decodedText);
 
-    // Stop scanner after a successful scan
-    setScanning(false);
-    stopScanner();
-
     // Redirect to URL if valid
     if (isValidURL(decodedText)) {
       window.location.href = decodedText;
-    } else {
-      alert(`Scanned text: ${decodedText}`);
     }
   };
 
   const errorCallback = (errorMessage) => {
-    // Suppress noisy "no QR code found" logs
     if (
       errorMessage.includes("No MultiFormat Readers were able to detect the code")
     ) {
@@ -45,15 +38,7 @@ const QRCodeScanner = () => {
     console.error("QR Code scanning error:", errorMessage);
   };
 
-  const stopScanner = () => {
-    if (scannerInitialized) {
-      const scannerElement = document.getElementById("scanner");
-      if (scannerElement) {
-        scannerElement.innerHTML = ""; // Clear the scanner feed
-        setScannerInitialized(false);
-      }
-    }
-  };
+  
 
   const isValidURL = (string) => {
     try {
