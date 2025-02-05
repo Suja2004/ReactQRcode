@@ -43,7 +43,6 @@ button {
   height: 550px;
   flex: 1 0 100%;
   scroll-snap-align: start;
-  transition: all 0.5s linear;
   background-image: linear-gradient(90deg, #090979 35%, #00d4ff 100%);
 }
 

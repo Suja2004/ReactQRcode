@@ -4,7 +4,7 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 const QRCodeScanner = () => {
   const [scannerInitialized, setScannerInitialized] = useState(false);
   const [scanning, setScanning] = useState(false);
-  const [result, setResult] = useState(null);
+  // const [result, setResult] = useState(null);
 
   const startScanner = () => {
     if (!scannerInitialized) {
@@ -16,16 +16,26 @@ const QRCodeScanner = () => {
       scanner.render(successCallback, errorCallback);
       setScannerInitialized(true);
     }
-    setScanning(true); 
+    setScanning(true);
   };
 
   const successCallback = (decodedText, decodedResult) => {
     console.log("QR Code decoded:", decodedText);
-    setResult(decodedText);
+    // setResult(decodedText);
 
     // Redirect to URL if valid
     if (isValidURL(decodedText)) {
-      window.location.href = decodedText;
+      const userConfirmed = window.confirm(
+        `The QR code contains the URL: ${decodedText}. Do you want to open it?`
+      );
+
+      if (userConfirmed) {
+        window.location.href = decodedText;
+      } else {
+        console.log("Redirection canceled by the user.");
+      }
+    } else {
+      alert(`Scanned text: ${decodedText}`);
     }
   };
 
@@ -38,7 +48,7 @@ const QRCodeScanner = () => {
     console.error("QR Code scanning error:", errorMessage);
   };
 
-  
+
 
   const isValidURL = (string) => {
     try {
@@ -56,9 +66,11 @@ const QRCodeScanner = () => {
       {!scanning ? (
         <button onClick={startScanner}>Start Scanning</button>
       ) : (
-        <p>
-          Scanned QR Code Data: <strong>{result}</strong>
-        </p>)}
+        // <p>
+        //   Scanned QR Code Data: <strong>{result}</strong>
+        // </p>
+        ""
+      )}
 
       <div id="scanner-container">
         <div id="scanner" className="scanner"></div>
