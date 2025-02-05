@@ -3,7 +3,7 @@ import QRCode from 'react-qr-code';
 
 function QRCodeGenerator() {
   const [inputText, setInputText] = useState('');
-  const qrCodeRef = useRef(null); // Reference to the QR Code container
+  const qrCodeRef = useRef(null); 
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -11,7 +11,7 @@ function QRCodeGenerator() {
 
   // Function to download the QR code
   const handleDownload = () => {
-    const svgElement = qrCodeRef.current.querySelector('svg'); // Get the SVG element
+    const svgElement = qrCodeRef.current.querySelector('svg'); 
     const svgData = new XMLSerializer().serializeToString(svgElement);
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
